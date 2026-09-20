@@ -1,0 +1,30 @@
+# Label catalog
+#
+# Provisioned by .github/workflows/labels.yml.
+# Format:
+# name | color | description
+
+type: feat | 1D76DB | New functionality
+type: fix | D73A4A | Bug fix
+type: docs | 0075CA | Documentation
+type: style | 5319E7 | Formatting or style
+type: refactor | A2EEEF | Internal refactor
+type: perf | FBCA04 | Performance improvement
+type: test | 7057FF | Tests
+type: build | BFD4F2 | Build system
+type: ci | 0366D6 | Continuous integration
+type: chore | C5DEF5 | Maintenance
+type: revert | E4E669 | Revert
+type: breaking | B60205 | Breaking change
+
+status: ready | 0E8A16 | Ready for implementation
+status: in-progress | FBCA04 | Work in progress
+status: needs-review | D93F0B | Awaiting review
+status: blocked | 5319E7 | Blocked
+status: done | 0E8A16 | Completed
+
+area: core | C2E0C6 | Core domain
+area: terminal | C5DEF5 | Terminal interface
+area: persistence | BFD4F2 | Persistence
+area: security | D73A4A | Security
+area: documentation | 0075CA | Documentation
