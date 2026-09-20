@@ -45,21 +45,6 @@ O produto controla dados cadastrais, status e os produtos, ativos ou serviços a
 - [ ] Persistência local
 - [ ] Autenticação e permissões
 
-## Requisitos não funcionais
-
-| Requisito | Diretriz |
-|---|---|
-| Linguagem | C23 |
-| Portabilidade | Linux/Unix como ambiente principal; evitar dependências desnecessárias de plataforma |
-| Arquitetura | Separação entre UI, aplicação, domínio, store e persistência |
-| Manutenibilidade | Módulos pequenos e interfaces públicas em `include/` |
-| Integridade | IDs únicos, positivos e não reutilizados |
-| Persistência | Camada desacoplada da interface |
-| Segurança | Credenciais separadas do cadastro; senha nunca em texto puro |
-| Confiabilidade | Desativação lógica para preservar histórico |
-| Extensibilidade | Novos campos e mecanismos de armazenamento sem reescrever a UI |
-| Build | Compilação reproduzível via Make |
-| Qualidade | Código compilável com GCC e Clang em modo C23 |
 
 ## Arquitetura
 
@@ -81,19 +66,6 @@ Diagramas UML:
 - [Modelo de classes](src/uml/class-model.svg)
 - [Arquitetura de componentes](src/uml/component-architecture.svg)
 
-Estrutura:
-
-```text
-login_term/
-├── include/       # Interfaces públicas
-├── src/           # Implementação em C
-│   └── uml/       # Diagramas UML em SVG
-├── core/          # Componentes centrais
-├── doc/           # Documentação técnica
-├── assets/svg/    # Assets SVG das tecnologias
-├── build/         # Binários
-└── obj/           # Objetos
-```
 
 ## Padrões e princípios
 
