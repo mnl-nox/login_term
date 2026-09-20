@@ -1,44 +1,67 @@
 # login_term
 
-Sistema de gerenciamento de usuários em terminal, desenvolvido em C.
+Sistema de gerenciamento de usuários em terminal, desenvolvido em **C23**.
 
-[![C](https://img.shields.io/badge/C-C17-A8B9CC?logo=c&logoColor=white)](https://en.cppreference.com/w/c/17)
+<p>
+  <img src="assets/svg/c23.svg" alt="C23" height="40">
+  <img src="assets/svg/gcc.svg" alt="GCC" height="40">
+  <img src="assets/svg/clang.svg" alt="Clang" height="40">
+  <img src="assets/svg/make.svg" alt="GNU Make" height="40">
+  <img src="assets/svg/linux.svg" alt="Linux" height="40">
+  <img src="assets/svg/sqlite.svg" alt="SQLite" height="40">
+</p>
+
+[![C23](https://img.shields.io/badge/C-C23-A8B9CC?logo=c&logoColor=white)](https://en.cppreference.com/w/c/23)
 [![GCC](https://img.shields.io/badge/GCC-Compiler-A42E2B?logo=gnu&logoColor=white)](https://gcc.gnu.org/)
 [![Clang](https://img.shields.io/badge/Clang-Compiler-262D3A?logo=llvm&logoColor=white)](https://clang.llvm.org/)
-[![Make](https://img.shields.io/badge/GNU%20Make-Build-204866?logo=gnu&logoColor=white)](https://www.gnu.org/software/make/)
+[![GNU Make](https://img.shields.io/badge/GNU%20Make-Build-204866?logo=gnu&logoColor=white)](https://www.gnu.org/software/make/)
 [![Linux](https://img.shields.io/badge/Linux-Development-FCC624?logo=linux&logoColor=black)](https://www.linux.org/)
 [![SQLite](https://img.shields.io/badge/SQLite-Planned-003B57?logo=sqlite&logoColor=white)](https://sqlite.org/)
 
 ## Visão geral
 
-O `login_term` centraliza o cadastro e gerenciamento de usuários por meio de uma interface de terminal.
+O `login_term` centraliza o cadastro e gerenciamento de usuários em uma interface de terminal.
 
-O sistema foi projetado para controlar dados cadastrais, status dos usuários e os produtos, ativos ou serviços associados a cada cadastro.
+O produto controla dados cadastrais, status e os produtos, ativos ou serviços associados a cada usuário.
 
 ## O que o produto resolve
 
-- Identificação única por usuário.
-- Consulta rápida por ID.
+- Identificação única e consulta por ID.
 - Cadastro e atualização de informações.
-- Ativação e desativação sem apagar o histórico.
-- Associação de produtos, ativos e serviços aos usuários.
+- Ativação e desativação sem exclusão física.
+- Relacionamento entre usuários e produtos/serviços.
+- Preservação do histórico cadastral.
 - Base modular para futura persistência e autenticação.
 
 ## Funcionalidades
 
-- [ ] Cadastrar usuário
-- [ ] Gerar ID automaticamente
-- [ ] Listar usuários ativos
-- [ ] Buscar usuário por ID
-- [ ] Atualizar cadastro
-- [ ] Desativar / reativar usuário
-- [ ] Gerenciar produtos, ativos e serviços
-- [ ] Persistir dados localmente
+- [ ] Cadastro de usuários
+- [ ] Geração automática de ID
+- [ ] Listagem de usuários ativos
+- [ ] Busca por ID
+- [ ] Atualização cadastral
+- [ ] Desativação e reativação
+- [ ] Produtos, ativos e serviços
+- [ ] Persistência local
 - [ ] Autenticação e permissões
 
-## Arquitetura
+## Requisitos não funcionais
 
-A aplicação segue separação de responsabilidades:
+| Requisito | Diretriz |
+|---|---|
+| Linguagem | C23 |
+| Portabilidade | Linux/Unix como ambiente principal; evitar dependências desnecessárias de plataforma |
+| Arquitetura | Separação entre UI, aplicação, domínio, store e persistência |
+| Manutenibilidade | Módulos pequenos e interfaces públicas em `include/` |
+| Integridade | IDs únicos, positivos e não reutilizados |
+| Persistência | Camada desacoplada da interface |
+| Segurança | Credenciais separadas do cadastro; senha nunca em texto puro |
+| Confiabilidade | Desativação lógica para preservar histórico |
+| Extensibilidade | Novos campos e mecanismos de armazenamento sem reescrever a UI |
+| Build | Compilação reproduzível via Make |
+| Qualidade | Código compilável com GCC e Clang em modo C23 |
+
+## Arquitetura
 
 ```text
 Terminal UI
@@ -52,27 +75,36 @@ Store / Repository
 Persistence
 ```
 
+Diagramas UML:
+
+- [Casos de uso](src/uml/use-cases.svg)
+- [Modelo de classes](src/uml/class-model.svg)
+- [Arquitetura de componentes](src/uml/component-architecture.svg)
+
 Estrutura:
 
 ```text
 login_term/
-├── include/    # Interfaces públicas
-├── src/        # Implementação em C
-├── core/       # Componentes centrais
-├── doc/        # Documentação
-├── build/      # Binários
-└── obj/        # Objetos
+├── include/       # Interfaces públicas
+├── src/           # Implementação em C
+│   └── uml/       # Diagramas UML em SVG
+├── core/          # Componentes centrais
+├── doc/           # Documentação técnica
+├── assets/svg/    # Assets SVG das tecnologias
+├── build/         # Binários
+└── obj/           # Objetos
 ```
 
 ## Padrões e princípios
 
-- **C17** como padrão da linguagem.
-- **Separação de responsabilidades** entre UI, aplicação, domínio e persistência.
-- **Modularidade** com interfaces públicas em `include/`.
-- **Soft delete** para desativação de usuários e itens.
+- **C23** como padrão da linguagem.
+- **Separação de responsabilidades**.
+- **Modularidade** através de headers em `include/`.
+- **Soft delete** para usuários e itens.
 - **ID gerado pelo sistema**, único e não reutilizado.
-- **Conventional Commits** para mensagens de commit.
-- Credenciais de autenticação separadas dos dados cadastrais e sem armazenamento de senha em texto puro.
+- **Conventional Commits**.
+- Credenciais de autenticação isoladas dos dados cadastrais.
+- Persistência desacoplada da regra de negócio.
 
 ## Documentação
 
@@ -85,7 +117,7 @@ login_term/
 
 ## Compilação
 
-A compilação será centralizada pelo `Makefile`.
+O projeto utiliza `Makefile` e deve compilar explicitamente em C23:
 
 ```bash
 make
@@ -93,11 +125,16 @@ make run
 make clean
 ```
 
+Compiladores previstos:
+
+- GCC
+- Clang
+
 ## Status
 
 **Em desenvolvimento inicial.**
 
-A prioridade atual é implementar o núcleo de gerenciamento de usuários e, em seguida, a interface de terminal e a persistência.
+Prioridade atual: implementar o núcleo de gerenciamento de usuários, seguido pela interface de terminal e persistência.
 
 ## Licença
 
