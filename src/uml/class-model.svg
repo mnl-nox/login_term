@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="600" viewBox="0 0 1000 600">
+<rect width="1000" height="600" fill="#fff"/><text x="500" y="45" text-anchor="middle" font-family="Arial" font-size="25" font-weight="700">login_term — Modelo de Classes</text>
+<g stroke="#222" stroke-width="2" fill="#f8f8f8"><rect x="80" y="100" width="310" height="270"/><rect x="610" y="100" width="310" height="300"/><rect x="315" y="455" width="370" height="105"/></g>
+<g font-family="Arial" font-size="17"><text x="235" y="130" text-anchor="middle" font-weight="700">User</text><line x1="80" y1="145" x2="390" y2="145" stroke="#222"/>
+<text x="100" y="175">+ id: unsigned int</text><text x="100" y="205">+ name: char[]</text><text x="100" y="235">+ phone: char[]</text><text x="100" y="265">+ username: char[]</text><text x="100" y="295">+ active: bool</text>
+<text x="765" y="130" text-anchor="middle" font-weight="700">Product</text><line x1="610" y1="145" x2="920" y2="145" stroke="#222"/>
+<text x="630" y="175">+ id: unsigned int</text><text x="630" y="205">+ user_id: unsigned int</text><text x="630" y="235">+ name: char[]</text><text x="630" y="265">+ type: char[]</text><text x="630" y="295">+ reference: char[]</text><text x="630" y="325">+ active: bool</text>
+<text x="500" y="485" text-anchor="middle" font-weight="700">UserStore</text><line x1="315" y1="500" x2="685" y2="500" stroke="#222"/><text x="335" y="530">users[] · count · next_id</text></g>
+<path d="M390 235H610M235 370V455M765 400V455H685" fill="none" stroke="#222" stroke-width="2"/>
+<text x="470" y="225" font-family="Arial" font-size="15">1 —— 0..*</text><text x="250" y="425" font-family="Arial" font-size="15">armazenado por</text>
+</svg>
