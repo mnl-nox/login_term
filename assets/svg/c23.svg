@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="180" height="56" viewBox="0 0 180 56" role="img" aria-label="C23">
+  <rect width="180" height="56" rx="8" fill="#111827"/>
+  <rect x="8" y="8" width="40" height="40" rx="6" fill="#A8B9CC"/>
+  <text x="28" y="35" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" font-weight="700" fill="#111827">C</text>
+  <text x="60" y="35" font-family="Arial, sans-serif" font-size="20" font-weight="700" fill="#F9FAFB">C23</text>
+</svg>
