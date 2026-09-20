@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="180" height="56" viewBox="0 0 180 56" role="img" aria-label="Clang LLVM">
+  <rect width="180" height="56" rx="8" fill="#111827"/>
+  <circle cx="28" cy="28" r="17" fill="#262D3A"/>
+  <path d="M19 31 C19 21 37 21 37 31 C34 28 31 35 28 35 C25 35 23 29 19 31Z" fill="#F9FAFB"/>
+  <text x="52" y="35" font-family="Arial, sans-serif" font-size="19" font-weight="700" fill="#F9FAFB">Clang</text>
+</svg>
