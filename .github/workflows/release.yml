@@ -1,0 +1,112 @@
+name: Semantic Version Tag
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  tag:
+    name: Calculate and create release tag
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+          fetch-tags: true
+
+      - name: Calculate version
+        id: version
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          last_tag="$(git tag --sort=-v:refname | head -n 1 || true)"
+
+          if [[ -z "$last_tag" ]]; then
+            current="0.0.0"
+            range="HEAD"
+          else
+            current="${last_tag#v}"
+            range="${last_tag}..HEAD"
+          fi
+
+          if [[ ! "$current" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            echo "Latest tag is not SemVer: $current"
+            exit 1
+          fi
+
+          IFS='.' read -r major minor patch <<< "$current"
+
+          mapfile -t commits < <(git log $range --pretty=format:%s)
+
+          has_commit=0
+          bump=0
+
+          for subject in "${commits[@]}"; do
+            [[ -z "$subject" ]] && continue
+
+            if [[ "$subject" =~ ^[a-z]+(\([^)]*\))?!: ]] ||
+               [[ "$subject" =~ BREAKING[[:space:]]CHANGE ]]; then
+              bump=2
+              has_commit=1
+              continue
+            fi
+
+            if [[ "$subject" =~ ^feat(\([^)]*\))?: ]]; then
+              (( bump < 1 )) && bump=1
+              has_commit=1
+              continue
+            fi
+
+            if [[ "$subject" =~ ^(fix|perf|refactor|revert|build|ci|test|docs|style|chore)(\([^)]*\))?: ]]; then
+              (( bump < 1 )) && bump=0
+              has_commit=1
+            fi
+          done
+
+          if (( has_commit == 0 )); then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          case "$bump" in
+            2)
+              ((major++))
+              minor=0
+              patch=0
+              ;;
+            1)
+              ((minor++))
+              patch=0
+              ;;
+            0)
+              ((patch++))
+              ;;
+          esac
+
+          next="v$major.$minor.$patch"
+
+          if git rev-parse "$next" >/dev/null 2>&1; then
+            echo "Tag already exists: $next"
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          echo "changed=true" >> "$GITHUB_OUTPUT"
+          echo "tag=$next" >> "$GITHUB_OUTPUT"
+
+      - name: Create tag
+        if: steps.version.outputs.changed == 'true'
+        env:
+          TAG: ${{ steps.version.outputs.tag }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git tag -a "$TAG" -m "release: $TAG"
+          git push origin "$TAG"
