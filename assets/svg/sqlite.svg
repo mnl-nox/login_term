@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="180" height="56" viewBox="0 0 180 56" role="img" aria-label="SQLite">
+  <rect width="180" height="56" rx="8" fill="#111827"/>
+  <ellipse cx="27" cy="28" rx="17" ry="18" fill="#003B57"/>
+  <path d="M27 11 C20 17 19 27 23 38 C28 29 33 23 37 16 C34 13 31 11 27 11Z" fill="#F9FAFB"/>
+  <text x="52" y="35" font-family="Arial, sans-serif" font-size="20" font-weight="700" fill="#F9FAFB">SQLite</text>
+</svg>
