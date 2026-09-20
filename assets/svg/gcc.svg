@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="180" height="56" viewBox="0 0 180 56" role="img" aria-label="GCC">
+  <rect width="180" height="56" rx="8" fill="#111827"/>
+  <path d="M10 36 L20 14 L30 36 Z M20 21 L15 32 L25 32 Z" fill="#A42E2B"/>
+  <text x="48" y="35" font-family="Arial, sans-serif" font-size="20" font-weight="700" fill="#F9FAFB">GCC</text>
+</svg>
